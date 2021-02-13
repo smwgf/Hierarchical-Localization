@@ -18,6 +18,14 @@ line using their name. Each is a dictionary with the following entries:
     - model: the model configuration, as passed to a feature matcher.
 '''
 confs = {
+    'superglue_indoor': {
+        'output': 'matches-superglue',
+        'model': {
+            'name': 'superglue',
+            'weights': 'indoor',
+            'sinkhorn_iterations': 50,
+        },
+    },
     'superglue': {
         'output': 'matches-superglue',
         'model': {

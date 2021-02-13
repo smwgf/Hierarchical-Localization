@@ -162,8 +162,7 @@ def read_nvm_model(
 
     return cameras, images, points3D
 
-
-def main(nvm, intrinsics, database, output, skip_points=False):
+def main(nvm, intrinsics, database, output, skip_points=False,ext='.bin'):
     assert nvm.exists(), nvm
     assert intrinsics.exists(), intrinsics
     assert database.exists(), database
@@ -176,7 +175,7 @@ def main(nvm, intrinsics, database, output, skip_points=False):
 
     logging.info('Writing the COLMAP model...')
     output.mkdir(exist_ok=True, parents=True)
-    write_model(*model, path=str(output), ext='.bin')
+    write_model(*model, path=str(output), ext=ext)
     logging.info('Done.')
 
 

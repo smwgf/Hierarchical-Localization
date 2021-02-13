@@ -80,6 +80,8 @@ def read_next_bytes(fid, num_bytes, format_char_sequence, endian_character="<"):
     :return: Tuple of read and unpacked values.
     """
     data = fid.read(num_bytes)
+    if len(data) !=num_bytes:
+        return None
     return struct.unpack(endian_character + format_char_sequence, data)
 
 
@@ -234,6 +236,7 @@ def read_images_binary(path_to_model_file):
         for image_index in range(num_reg_images):
             binary_image_properties = read_next_bytes(
                 fid, num_bytes=64, format_char_sequence="idddddddi")
+            if binary_image_properties is None: continue
             image_id = binary_image_properties[0]
             qvec = np.array(binary_image_properties[1:5])
             tvec = np.array(binary_image_properties[5:8])
